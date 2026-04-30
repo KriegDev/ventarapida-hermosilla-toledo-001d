@@ -22,6 +22,6 @@ public interface StockRepository extends JpaRepository<Stock, Long>{
 
     @Modifying
     @Transactional
-    @Query("UPDATE Stock s SET s.stockminimo = :nuevoMinimo WHERE s.id = :id")
+    @Query("UPDATE Stock s SET s.stockMinimo = :nuevoMinimo WHERE s.id = :id")
     Long updateStockMinimo(@Param("id") Long id, @Param("nuevoMinimo") BigDecimal nuevoMinimo);
 }
