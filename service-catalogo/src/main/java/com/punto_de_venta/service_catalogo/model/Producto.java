@@ -26,29 +26,30 @@ public class Producto {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank //Validación para Strings que no tenga espacios vacios, ni nulls
+    @NotBlank(message = "No puede tener nulos ni espacios en blanco")
+     //Validación para Strings que no tenga espacios vacios, ni nulls
     @Column(unique = true,nullable=false)
     private String sku;
 
 
-    @NotBlank
-    @Size(max = 25)
+    @NotBlank(message = "No puede tener nulos ni espacios en blanco")
+    @Size(max = 25,message = "El máximo es de 25")
     @Column(nullable=false, length = 25)
     private String nombre;
 
 
-    @NotBlank
-    @Size(max = 255)
+    @NotBlank(message = "No puede tener nulos ni espacios en blanco")
+    @Size(max = 255, message = "El máximo es de 255")
     @Column(nullable = false, length = 255)
     private String descripcion;
 
 
     @Min(value = 0, message = "No debe ser menor a 0")
-    @NotNull //Validación para que los Longs no sean nulos 
+    @NotNull(message = "No puede contener espacios vacios") //Validación para que los Longs no sean nulos 
     @Column(name = "precio_base", nullable = false)
     private Long precioBase;
 
-    @NotNull
+    @NotNull(message = "No puede contener espacios vacios")
     @Column(nullable = false)
     private Boolean granel;
 

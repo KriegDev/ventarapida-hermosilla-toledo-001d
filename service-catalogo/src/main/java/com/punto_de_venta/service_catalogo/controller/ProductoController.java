@@ -66,6 +66,12 @@ public class ProductoController {
         return ResponseEntity.ok(productoEliminar);
     }
 
+    @GetMapping("/existe/{id}")
+    public ResponseEntity<Boolean> existe(@PathVariable Long id){
+        Boolean existe = productoService.existe(id);
+        return ResponseEntity.ok(existe);
+    }
+
 
 
 }

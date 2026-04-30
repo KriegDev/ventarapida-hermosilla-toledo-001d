@@ -24,8 +24,8 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(max = 25)
+    @NotBlank(message = "No puede contener espacios en blanco ni nulos")
+    @Size(max = 25, message = "Excede el largo máximo de 25")
     @Column(nullable = false, length = 25)
     private String nombre;    
 }
