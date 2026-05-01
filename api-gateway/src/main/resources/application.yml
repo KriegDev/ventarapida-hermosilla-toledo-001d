@@ -1,0 +1,23 @@
+server:
+    port: 4425
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        # RUTA PARA SERVICIO DE CATÁLOGO
+        - id:  service-catalogo
+          uri: http://localhost:4419
+          predicates:
+          - Path=/api/v1/catalogo/**
+        # RUTA PARA SERVICIO DE INVENTARIO
+        - id: service-inventario
+          uri: http://localhost:4421
+          predicates:
+          - Path=/api/v1/movimiento-inventario/**
+        # RUTA PARA SERVICIO DE VENTAS
+        # RUTA PARA SERVICIO DE PAGOS
+        # RITA PARA SERVICIO DE CLIENTES
+            
