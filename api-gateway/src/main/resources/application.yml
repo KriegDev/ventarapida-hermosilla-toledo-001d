@@ -11,12 +11,12 @@ spring:
         - id:  service-catalogo
           uri: http://localhost:4419
           predicates:
-          - Path=/api/v1/catalogo/**
+          - Path=/api/v1/catalogo/**, /api/v1/productos/**
         # RUTA PARA SERVICIO DE INVENTARIO
         - id: service-inventario
           uri: http://localhost:4421
           predicates:
-          - Path=/api/v1/movimiento-inventario/**
+          - Path=/api/v1/movimiento-inventario/**, /api/v1/stock/**
         # RUTA PARA SERVICIO DE VENTAS
         # RUTA PARA SERVICIO DE PAGOS
         # RITA PARA SERVICIO DE CLIENTES

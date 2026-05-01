@@ -113,12 +113,14 @@ public class InventarioService {
         if (stock.getIdProducto()!=null) {
             try{
                 Object producto = webClientBuilder.build()
-                .get().uri("http://localhost:4419/api/v1/productos"+stock.getIdProducto())
+                .get().uri("http://localhost:4425/api/v1/productos/"+stock.getIdProducto())
                 .retrieve().bodyToMono(Object.class).block();
 
                 stock.setDatosProducto(producto);
             } catch (Exception e){
                 stock.setDatosProducto("Información de producto no disponible");
+                e.printStackTrace(); 
+                stock.setDatosProducto("Error: " + e.getMessage());
             }
         }
         return stock;
