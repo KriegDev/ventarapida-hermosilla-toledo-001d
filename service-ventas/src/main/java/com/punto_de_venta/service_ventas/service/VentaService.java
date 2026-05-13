@@ -48,7 +48,7 @@ public class VentaService {
             //Aquí modificamos el stock del producto
             webClientBuilder.build()
             .post()
-            .uri("http://localhost:4425/api/v1/inventario/movimiento/"+detalle.getIdProducto())
+            .uri("http://localhost:4425/api/v1/movimiento-inventario/nuevo/"+detalle.getIdProducto())
             .bodyValue(new MovimientoDTO("Salida", detalle.getCantidad()))
             .retrieve()
             .onStatus(HttpStatusCode::isError, response -> {
@@ -66,7 +66,7 @@ public class VentaService {
         try{
             webClientBuilder.build()
             .post()
-            .uri("http://localhost:4425/api/v1/pagos/procesar")
+            .uri("http://localhost:4425/api/v1/pago/procesar")
             .bodyValue(new PagoDTO(orden.getNumeroOrden(), totalOrden, orden.getIdMetodoPago()))
             .retrieve()
             .bodyToMono(Void.class).block();

@@ -30,8 +30,9 @@ public class MetodoPagoController {
         return ResponseEntity.ok(metodoPagoService.actualizarMetodoPago(id, metodoPago));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminar(@PathVariable Long id) {
-        return ResponseEntity.ok(metodoPagoService.anularMetodoPago(id));
+    @PatchMapping("actualizar-status/{id}")
+    public ResponseEntity<String> ActualizarStatusMetodoPago(@PathVariable Long id,@RequestBody MetodoPago metodoPago){
+        String mensaje = metodoPagoService.actualizarEstadoMetodoPago(id,metodoPago.getActivo());
+        return ResponseEntity.ok(mensaje);
     }
 }

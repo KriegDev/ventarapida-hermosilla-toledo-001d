@@ -8,7 +8,8 @@
             "mainClass": "com.ventarapida.api_gateway.ApiGatewayApplication",
             "projectName": "api-gateway",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
         },
         {
             "type": "java",
@@ -47,6 +48,16 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "com.punto_de_venta.service_ventas.ServiceVentasApplication",
             "projectName": "service-ventas",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ServiceClienteApplication<service-cliente>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.punto_de_venta.service_cliente.ServiceClienteApplication",
+            "projectName": "service-cliente",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }

@@ -12,8 +12,6 @@ spring:
           uri: http://localhost:4419
           predicates:
           - Path=/api/v1/categorias/**, /api/v1/productos/**
-          - Path=/api/v1/categorias/**
-          - Path=/api/v1/productos/**
         # RUTA PARA SERVICIO DE INVENTARIO
         - id: service-inventario
           uri: http://localhost:4421
@@ -28,6 +26,10 @@ spring:
         - id: service-pagos
           uri: http://localhost:4423
           predicates:
-          - Path=/api/v1/pago/**, /api/v1/metodo-pago/**
+          - Path=/api/v1/pago/**, /api/v1/metodos-pago/**
         # RITA PARA SERVICIO DE CLIENTES
+        - id: service-clientes
+          uri: http://localhost:4420
+          predicates:
+          - Path=/api/v1/clientes/**
             

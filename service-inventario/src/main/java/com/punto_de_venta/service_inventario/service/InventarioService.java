@@ -32,7 +32,7 @@ public class InventarioService {
     @Transactional
     public MovimientoInventario nuevoMovimiento(Long idProd, MovimientoInventario mov) {
         Boolean existeEnStock = webClientBuilder.build()
-                .get().uri("http://localhost:4419/api/v1/productos/existe" + idProd)
+                .get().uri("http://localhost:4425/api/v1/productos/existe/" + idProd)
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .block();
@@ -140,5 +140,16 @@ public class InventarioService {
             throw new RuntimeException("No se encontró la ID especificada. No se actualizó nada.");
         }
    }
+
+   public List<Stock> listarStock() {
+    
+    List<Stock> stocks = stockRepository.findAll();
+
+    
+    stocks.forEach(this::stockConProducto); 
+
+    
+    return stocks;
+}
 
 }

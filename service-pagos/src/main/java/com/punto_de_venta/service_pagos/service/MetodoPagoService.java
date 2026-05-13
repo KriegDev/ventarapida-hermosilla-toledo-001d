@@ -41,12 +41,16 @@ public class MetodoPagoService {
     }
 
     @Transactional
-    public String anularMetodoPago(Long id){
-        MetodoPago metodoPago = metodoPagoRepository.findById(id)
-        .orElseThrow(()-> new RuntimeException("Metodo de pago no encontrado") );
-        metodoPago.setActivo(false);
-        metodoPagoRepository.save(metodoPago);
-        return "Metodo de pago anulado";
+    public String actualizarEstadoMetodoPago(Long id, Boolean estado){
+        MetodoPago metodoPagoActualizar = metodoPagoRepository.findById(id)
+        .orElse(null);
+        if(metodoPagoActualizar==null){
+            return "Metodo de Pago no encontrado";
+        }else{
+            metodoPagoActualizar.setActivo(estado);
+            metodoPagoRepository.save(metodoPagoActualizar);
+            return "El estado del Metodo de Pago ha sido actualizado";
+        }
     }
 
     public boolean esMetodoExterno(Long id){

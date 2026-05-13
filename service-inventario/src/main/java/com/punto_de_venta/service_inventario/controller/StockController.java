@@ -39,4 +39,14 @@ public class StockController {
         is.actualizarStockMinimo(id, stock.getStockMinimo());
         return ResponseEntity.ok(is.obtenerStockId(id));
     }
+
+    @GetMapping
+    public ResponseEntity<List<Stock>> listarStock(){
+        List<Stock> stock= is.listarStock();
+        if(stock.size()>0){
+            return ResponseEntity.ok(stock);
+        }else{
+            return ResponseEntity.noContent().build();
+        }
+    }
 }
