@@ -72,7 +72,9 @@ public class InventarioService {
     public Optional<MovimientoInventario> obtenerMovimientoPorId(Long id){
         MovimientoInventario mov = movimientoInventarioRepository.findById(id).orElse(null);
         if (mov!=null) {
-            return movimientoInventarioRepository.findById(id);
+            MovimientoInventario movi = movimientoInventarioRepository.findById(id).orElse(null);
+            movi.setStock(stockConProducto(movi.getStock()));
+            return Optional.of(movi);
         } else {
             throw new RuntimeException("El movimiento no existe");
         }
@@ -96,7 +98,11 @@ public class InventarioService {
     }
 
     public List<MovimientoInventario> listarMovimientos(){
-        return movimientoInventarioRepository.findAll();
+        List<MovimientoInventario> listaMovimientos = movimientoInventarioRepository.findAll();
+        for (int i = 0; i < listaMovimientos.size(); i++) {
+            listaMovimientos.get(i).setStock(stockConProducto(listaMovimientos.get(i).getStock()));
+        }
+        return listaMovimientos;
     }
 
     // ---MÉTODOS ESPECIFICOS PARA STOCK---

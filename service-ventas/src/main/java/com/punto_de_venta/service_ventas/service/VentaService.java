@@ -1,10 +1,12 @@
 package com.punto_de_venta.service_ventas.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -41,7 +43,7 @@ public class VentaService {
             .bodyToMono(ProductoDTO.class).block();
 
             if (prod != null) {
-                detalle.setPrecioUnitario(prod.getPrecio());
+                detalle.setPrecioUnitario(prod.getPrecioBase());
                 detalle.setDatosProducto(prod);
             }
 
@@ -49,19 +51,21 @@ public class VentaService {
             webClientBuilder.build()
             .post()
             .uri("http://localhost:4425/api/v1/movimiento-inventario/nuevo/"+detalle.getIdProducto())
-            .bodyValue(new MovimientoDTO("Salida", detalle.getCantidad()))
+            .bodyValue(new MovimientoDTO("Salida", detalle.getCantidad(), LocalDateTime.now()))
             .retrieve()
             .onStatus(HttpStatusCode::isError, response -> {
                 return Mono.error(new RuntimeException("Error al actualizar inventario"));
             }).bodyToMono(Void.class).block();
 
-            Long precio = detalle.getPrecioUnitario();
+            Long precio = (detalle.getPrecioUnitario()!= null) ? detalle.getPrecioUnitario() :0L;
 
             totalOrden+=Math.round(precio* detalle.getCantidad().doubleValue());
         }
         orden.setMontoTotal(totalOrden);
         orden.setFechaVenta(LocalDate.now());
         orden.setStatus("Pendiente");
+
+        System.out.println("DEBUG: id pago: "+orden.getIdMetodoPago());
 
         try{
             webClientBuilder.build()
@@ -71,7 +75,7 @@ public class VentaService {
             .retrieve()
             .bodyToMono(Void.class).block();
 
-            orden.setStatus("PAGADO");
+            orden.setStatus("PENDIENTE_PAGO");
 
         } catch (Exception e){
             orden.setStatus("Pago Rechazado");
@@ -116,6 +120,12 @@ public class VentaService {
                 detalle.setDatosProducto("Información de catálogo no disponible");
             }
         }
+    }
+
+    public List<Orden> listarOrdenes() {
+        List<Orden> listaOrdenes = ordenRepository.findAll();
+        listaOrdenes.forEach(this::enriquecerOrden);
+        return listaOrdenes;
     }
 
 

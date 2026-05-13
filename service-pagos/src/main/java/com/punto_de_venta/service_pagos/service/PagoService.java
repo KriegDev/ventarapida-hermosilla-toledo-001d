@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.punto_de_venta.service_pagos.model.MetodoPago;
 import com.punto_de_venta.service_pagos.model.Pago;
+import com.punto_de_venta.service_pagos.dto.PagoDTO;
 import com.punto_de_venta.service_pagos.dto.PagoResponse;
 import com.punto_de_venta.service_pagos.repository.MetodoPagoRepository;
 import com.punto_de_venta.service_pagos.repository.PagoRepository;
@@ -37,23 +38,26 @@ public class PagoService {
                 .orElseThrow(() -> new RuntimeException("El pago no existe"));
     }
 
-    @Transactional
-    public Pago procesarPago(Pago pago) {
-        log.info("Iniciando procesamiento de pago para la Orden ID: {}", pago.getIdOrden());
+    
+@Transactional
+public Pago procesarPago(PagoDTO dto) { 
+    log.info("Iniciando procesamiento de pago para la Orden ID: {}", dto.getIdOrden());
 
-
-        MetodoPago metodo = metodoPagoRepository.findById(pago.getMetodoPago().getId())
-                .orElseThrow(() -> new RuntimeException("Error: Método de pago no encontrado."));
-        
-        if (!metodo.getActivo()) {
-            throw new RuntimeException("Error: El método de pago seleccionado no está activo.");
-        }
-
-        pago.setMetodoPago(metodo);
-        pago.setFechaCreacion(LocalDateTime.now());
-
-        //Evaluar el flujo según el ID del método de pago (4 = Flow)
-        if (metodo.getId() == 4L) {
+    if (dto.getIdMetPago()==null) {
+        throw new RuntimeException("ID llegó nulo. DTO: "+dto.toString());
+    }
+   
+    MetodoPago metodo = metodoPagoRepository.findById(dto.getIdMetPago())
+            .orElseThrow(() -> new RuntimeException("Error: Método de pago no encontrado."));
+    
+    
+    Pago pago = new Pago();
+    pago.setIdOrden(dto.getIdOrden());
+    pago.setMonto(dto.getMonto());
+    pago.setMetodoPago(metodo); 
+    pago.setFechaCreacion(LocalDateTime.now());
+    
+    if (metodo.getId() == 4L) {
             log.info("Método Flow detectado. Generando link de pago...");
             
             pago.setEstado("PENDIENTE");

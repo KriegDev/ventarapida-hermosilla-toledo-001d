@@ -1,5 +1,6 @@
 package com.punto_de_venta.service_pagos.controller;
 
+import com.punto_de_venta.service_pagos.dto.PagoDTO;
 import com.punto_de_venta.service_pagos.model.Pago;
 import com.punto_de_venta.service_pagos.service.PagoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,10 @@ public class PagoController {
     private PagoService pagoService;
 
     @PostMapping("/procesar")
-    public ResponseEntity<Pago> procesarPago(@RequestBody Pago pago) {
-        return ResponseEntity.ok(pagoService.procesarPago(pago));
-    }
+public ResponseEntity<?> procesar(@RequestBody PagoDTO pagoDto) {
+    Pago resultado = pagoService.procesarPago(pagoDto);
+    return ResponseEntity.ok(resultado);
+}
 
     @GetMapping("/confirmar-flow")
     public ResponseEntity<Pago> confirmarPago(@RequestParam("token") String token) {

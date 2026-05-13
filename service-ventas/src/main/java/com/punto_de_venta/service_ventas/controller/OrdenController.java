@@ -55,4 +55,13 @@ public class OrdenController {
         }
         return ResponseEntity.ok(listaOrdenes);
     }
+
+    @GetMapping
+    public ResponseEntity<List<Orden>> listarOrdenes(){
+        List<Orden> listaOrdenes = vs.listarOrdenes();
+        if (listaOrdenes.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(listaOrdenes);
+    }
 }

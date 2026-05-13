@@ -1,5 +1,4 @@
-package com.punto_de_venta.service_ventas.dto;
-
+package com.punto_de_venta.service_pagos.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
