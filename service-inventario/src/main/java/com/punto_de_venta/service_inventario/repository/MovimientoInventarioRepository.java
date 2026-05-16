@@ -15,7 +15,7 @@ public interface MovimientoInventarioRepository extends JpaRepository<Movimiento
 
     List<MovimientoInventario> findByFechaMovimiento(LocalDateTime fechaMovimiento);
 
-    Optional<List<MovimientoInventario>> findByFechaMovimientoBetween(LocalDateTime inicio, LocalDateTime fin); // ---MÉTODO PARA BUSCAR POR RANGO DE DÍAS
+    Optional<List<MovimientoInventario>> findByFechaMovimientoBetween(LocalDateTime inicio, LocalDateTime fin);
 
-    Optional<List<MovimientoInventario>> findByFechaMovimientoAfter(LocalDateTime fechaMovimiento); // ---MÉTODO PARA BUSCAR DESPUÉS DE X DÍA
+    Optional<List<MovimientoInventario>> findByFechaMovimientoAfter(LocalDateTime fechaMovimiento);
 }

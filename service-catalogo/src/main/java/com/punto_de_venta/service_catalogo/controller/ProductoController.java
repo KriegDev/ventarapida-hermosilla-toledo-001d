@@ -24,13 +24,11 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
 
-    //Crear Producto
     @PostMapping
     public ResponseEntity<Producto> crearProducto(@Valid @RequestBody Producto producto){
         return ResponseEntity.ok(productoService.crearProducto(producto));
     }
 
-    //Listar Productos
     @GetMapping
     public ResponseEntity<List<Producto>> listarProductos(){
         List<Producto> productos= productoService.listarProductos();
@@ -41,7 +39,6 @@ public class ProductoController {
         }
     }
 
-    //Buscar Producto id
     @GetMapping("/{id}")
     public ResponseEntity<Producto> buscarProductoId(@PathVariable Long id){
         Producto producto = productoService.buscarProductoId(id);

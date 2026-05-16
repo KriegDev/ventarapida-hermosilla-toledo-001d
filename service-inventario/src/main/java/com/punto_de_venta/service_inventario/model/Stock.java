@@ -26,15 +26,15 @@ public class Stock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotNull(message = "No puede contener espacios en blancos ni nulos")
     private Long idProducto;
 
     @Column(nullable = false)
-    @NotNull
+    @NotNull(message = "No puede contener espacios en blancos ni nulos")
     @Min(value = 0, message = "Cantidad no debe ser menor a cero")    
     private BigDecimal cantidad;
 
-    @NotNull    
+    @NotNull(message = "No puede contener espacios en blancos ni nulos")    
     @Min(value = 0, message = "No debe ser menor a 0")
     @Column(name = "stock_minimo", nullable = false)
     private BigDecimal stockMinimo;

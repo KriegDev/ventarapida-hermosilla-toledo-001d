@@ -15,24 +15,20 @@ public class CategoriaService {
     @Autowired
     CategoriaRepository categoriaRepository;
 
-    //Crear categoria
     @Transactional
     public Categoria crearCategoria(Categoria categoria){
         return categoriaRepository.save(categoria);
     }
 
-    //Listar categorias
     public List<Categoria> listarCategorias(){
         return categoriaRepository.findAll();
     }
 
-    //Buscar categoria id
     public Categoria buscarCategoriaId(Long id){
         return categoriaRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("La categoria no existe"));
     }
 
-    //Actualizar categoria
     @Transactional
     public Categoria actualizarCategoria(Long id, Categoria categoria){
         Categoria categoriaExistente = categoriaRepository.findById(id)
@@ -41,7 +37,6 @@ public class CategoriaService {
         return categoriaRepository.save(categoriaExistente);
     }
 
-    //Eliminar categoria
     @Transactional
     public String eliminarCategoria(Long id){
         Categoria categoria = categoriaRepository.findById(id)

@@ -39,7 +39,6 @@ public class FlowClient {
         }
 
         Map<String, String> params = new TreeMap<>();
-        // USAMOS TRIM() PARA ELIMINAR ESPACIOS INVISIBLES AL FINAL DE LA CLAVE
         params.put("apiKey", flowProperties.getApiKey().trim());
         params.put("commerceOrder", commerceOrder.trim());
         params.put("subject", subject.trim());
@@ -47,21 +46,17 @@ public class FlowClient {
         params.put("amount", amount.toString());
         params.put("email", email.trim());
         
-        // URL obligatorias
         params.put("urlConfirmation", "http://localhost:8080/pago/api/v1/pagos/confirmar-flow"); 
         params.put("urlReturn", "http://localhost:8080/venta/api/v1/ordenes/exito"); 
 
-        // 2. Firmamos los parámetros (Asegurando que la secretKey tampoco tenga espacios)
         String signature = generarFirma(params, flowProperties.getSecretKey().trim());
         params.put("s", signature);
 
-        // 3. Convertimos a Form Data
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.setAll(params);
 
         log.info("Enviando petición a Flow...");
         
-        // 4. Petición a Flow
         return webClientBuilder.build()
                 .post()
                 .uri(flowProperties.getBaseUrl().trim() + "/payment/create")
@@ -79,7 +74,6 @@ public class FlowClient {
                 dataToSign.append(entry.getKey()).append(entry.getValue());
             }
 
-            // ESTE LOG ES VITAL PARA DEBUGGEAR
             log.info("-> Datos concatenados exactos para la firma: [{}]", dataToSign.toString());
 
             Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
@@ -104,8 +98,6 @@ public class FlowClient {
         }
     }
     
-    // ... mantén el resto de tus métodos (confirmarPago, etc) aquí debajo ...
-
     public PagoResponse confirmarPago(String token) {
         Map<String, String> params = new TreeMap<>();
         params.put("apiKey", flowProperties.getApiKey());

@@ -17,7 +17,7 @@ public class PagoController {
     private PagoService pagoService;
 
     @PostMapping("/procesar")
-public ResponseEntity<?> procesar(@RequestBody PagoDTO pagoDto) {
+    public ResponseEntity<?> procesar(@RequestBody PagoDTO pagoDto) {
     Pago resultado = pagoService.procesarPago(pagoDto);
     return ResponseEntity.ok(resultado);
 }
@@ -29,7 +29,12 @@ public ResponseEntity<?> procesar(@RequestBody PagoDTO pagoDto) {
 
     @GetMapping
     public ResponseEntity<List<Pago>> listarTodos() {
-        return ResponseEntity.ok(pagoService.listarPagos());
+        List<Pago> pagos= pagoService.listarPagos();
+        if(pagos.size()>0){
+            return ResponseEntity.ok(pagos);
+        }else{
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @DeleteMapping("/{id}")

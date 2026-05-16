@@ -41,13 +41,22 @@ public class ClienteController {
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> buscarClienteId(@PathVariable Long id){
         Cliente cliente = clienteService.buscarClienteId(id);
-        return ResponseEntity.ok(cliente);
+        if(cliente!=null){
+            return ResponseEntity.ok(cliente);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/run/{run}")
     public ResponseEntity<Cliente> buscarClienteRun(@PathVariable Long run){
         Cliente cliente = clienteService.buscarClienteRun(run);
-        return ResponseEntity.ok(cliente);
+        if(cliente!=null){
+            return ResponseEntity.ok(cliente);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+        
     }
 
     @PatchMapping("actualizar-datos-contacto/{id}")
