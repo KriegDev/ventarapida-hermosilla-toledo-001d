@@ -35,7 +35,7 @@ public class Detalle {
     @JsonIgnore
     private Orden orden;
 
-    @NotNull
+    @NotNull(message = "No puede tener nulos ni espacios en blanco")
     @Column(name = "id_producto")
     private Long idProducto;
 

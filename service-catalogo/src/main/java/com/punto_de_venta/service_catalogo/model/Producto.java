@@ -27,7 +27,6 @@ public class Producto {
     private Long id;
 
     @NotBlank(message = "No puede tener nulos ni espacios en blanco")
-     //Validación para Strings que no tenga espacios vacios, ni nulls
     @Column(unique = true,nullable=false)
     private String sku;
 
@@ -45,7 +44,7 @@ public class Producto {
 
 
     @Min(value = 0, message = "No debe ser menor a 0")
-    @NotNull(message = "No puede contener espacios vacios") //Validación para que los Longs no sean nulos 
+    @NotNull(message = "No puede contener espacios vacios") 
     @Column(name = "precio_base", nullable = false)
     private Long precioBase;
 

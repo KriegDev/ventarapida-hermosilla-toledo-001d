@@ -17,24 +17,20 @@ public class ProductoService {
     @Autowired
     private ProductoRepository productoRepository;
 
-    //CrearProducto
-    @Transactional //Una anotación que permite guardar los cambios si es que salen bien, si no, se deshace de todo
+    @Transactional
     public Producto crearProducto(Producto producto){
         return productoRepository.save(producto);
     }
 
-    //Listar Productos
     public List<Producto> listarProductos(){
         return productoRepository.findAll();
     }
 
-    //buscar Producto Id
     public Producto buscarProductoId(Long id){
         return productoRepository.findById(id)
         .orElseThrow(()-> new RuntimeException("El producto no existe") );
     }
 
-    //Buscar por Sku
     public Producto buscarProductoSku(String sku){
         Producto productoId = productoRepository.findBySku(sku);
         if(productoId != null){
@@ -44,7 +40,6 @@ public class ProductoService {
         }
     }
 
-    //Verificar si el producto existe para el metodo de Nuevo movimiento del microservicio Inventario
     public Boolean existe (Long id){
         Producto productoId = productoRepository.findById(id).orElse(null);
         if(productoId != null){
@@ -54,7 +49,6 @@ public class ProductoService {
         }
     } 
 
-    //Actualizar Producto
     @Transactional
     public Producto actualizarProducto(Long id, Producto producto){
         Producto productoExistente = productoRepository.findById(id)
@@ -68,9 +62,6 @@ public class ProductoService {
             productoExistente.setCategoria(producto.getCategoria());
             return productoRepository.save(productoExistente);
     }
-    
-
-    //Eliminar producto
     @Transactional
     public String eliminarProducto(Long id){
         Producto producto = productoRepository.findById(id)
@@ -78,6 +69,4 @@ public class ProductoService {
         productoRepository.delete(producto);
         return "El producto ha sido eliminado exitosamente";
     }
-
-
 }

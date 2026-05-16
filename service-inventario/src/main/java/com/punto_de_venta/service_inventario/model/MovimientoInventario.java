@@ -34,17 +34,16 @@ public class MovimientoInventario {
     @JoinColumn(name = "stock_id", nullable = false)
     private Stock stock;
 
-    @NotNull
-    @NotBlank
+    @NotBlank(message = "No puede contener espacios en blancos ni nulos")
     @Column(name = "tipo_movimiento",  nullable = false) 
     private String tipoMovimiento;
 
-    @NotNull
+    @NotNull(message = "No puede contener espacios en blancos ni nulos")
     @Min(value = 0, message = "El monto no puede ser menor a cero")
     @Column(nullable = false)
     private BigDecimal monto;
 
     @Column(name = "fecha_movimiento",  nullable = false)
-    @NotNull
+    @NotNull(message = "No puede contener espacios en blancos ni nulos")
     private LocalDateTime fechaMovimiento;
 }

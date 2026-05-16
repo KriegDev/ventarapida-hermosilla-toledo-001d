@@ -29,7 +29,7 @@ public class MetodoPago {
     @Column(nullable=false, length = 25, unique = true)
     private String nombre;
 
-    @NotNull
+    @NotNull(message = "No puede contener espacios en blancos ni nulos")
     @Column(nullable = false)
     private Boolean activo;
 }

@@ -1,10 +1,10 @@
 package com.punto_de_venta.service_inventario.controller;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,18 +36,22 @@ public class MovimientoInventarioController {
     }
 
     @GetMapping("/buscar/{dia}")
-    public ResponseEntity<List<MovimientoInventario>> buscarPorDia(@PathVariable LocalDate dia){
-        return is.obtenerMovimientosPorDia(dia).map(ResponseEntity::ok).orElse(ResponseEntity.noContent().build());
-        
-    }
+    public ResponseEntity<List<MovimientoInventario>> buscarPorDia(
+    @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dia) {
+    
+        return is.obtenerMovimientosPorDia(dia)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.noContent().build());
+}
 
-    @GetMapping("/buscar/{fecha}")
-    public ResponseEntity<List<MovimientoInventario>> buscarMovimientosDesde(@PathVariable LocalDateTime fecha){
+    @GetMapping("/buscar-desde/{fecha}")
+    public ResponseEntity<List<MovimientoInventario>> buscarMovimientosDesde(
+    @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha){
         return is.obtenerMovimientosDesde(fecha).map(ResponseEntity::ok).orElse(ResponseEntity.noContent().build());
     }
 
     @GetMapping("/entre/{ini}/y/{fin}")
-    public ResponseEntity<List<MovimientoInventario>> buscarEntreFechas(@PathVariable LocalDateTime ini, @PathVariable LocalDateTime fin){
+    public ResponseEntity<List<MovimientoInventario>> buscarEntreFechas(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate ini, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fin){
         return is.obtenerMovimientosEntre(ini, fin).map(ResponseEntity::ok).orElse(ResponseEntity.noContent().build());
     }
 

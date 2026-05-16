@@ -30,13 +30,13 @@ public class Orden {
     private Long id;
 
     @Column(name = "numero_orden")
-    @NotNull
+    @NotNull(message = "No puede tener nulos ni espacios en blanco")
     private Long numeroOrden;
     
     @Column(name = "id_cliente")
     private Long idCliente;
 
-    @NotBlank
+    @NotBlank(message = "No puede tener nulos ni espacios en blanco")
     private String status;
 
     @Min(value = 0)

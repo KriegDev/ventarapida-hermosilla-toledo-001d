@@ -89,12 +89,15 @@ public class InventarioService {
         return movimientoInventarioRepository.findByFechaMovimientoBetween(inicio, fin);
     }
 
-    public Optional<List<MovimientoInventario>> obtenerMovimientosDesde(LocalDateTime fecha){
-        return movimientoInventarioRepository.findByFechaMovimientoAfter(fecha);
+    public Optional<List<MovimientoInventario>> obtenerMovimientosDesde(LocalDate fecha){
+        LocalDateTime desde = fecha.atStartOfDay();
+        return movimientoInventarioRepository.findByFechaMovimientoAfter(desde);
     }
 
-    public Optional<List<MovimientoInventario>> obtenerMovimientosEntre(LocalDateTime in, LocalDateTime fin){
-        return movimientoInventarioRepository.findByFechaMovimientoBetween(in, fin);
+    public Optional<List<MovimientoInventario>> obtenerMovimientosEntre(LocalDate in, LocalDate fin){
+        LocalDateTime inicio = in.atStartOfDay();
+        LocalDateTime findia = fin.atTime(23,59,59,59);
+        return movimientoInventarioRepository.findByFechaMovimientoBetween(inicio, findia);
     }
 
     public List<MovimientoInventario> listarMovimientos(){
@@ -134,9 +137,7 @@ public class InventarioService {
     
    public List<Stock> alertaBajoStock(){
         List<Stock> productosBajoStock = stockRepository.findByBajoStockMinimo();
-
         productosBajoStock.forEach(stock -> {this.stockConProducto(stock);});
-
         return productosBajoStock;
    }
 
@@ -146,15 +147,9 @@ public class InventarioService {
             throw new RuntimeException("No se encontró la ID especificada. No se actualizó nada.");
         }
    }
-
    public List<Stock> listarStock() {
-    
     List<Stock> stocks = stockRepository.findAll();
-
-    
     stocks.forEach(this::stockConProducto); 
-
-    
     return stocks;
 }
 
