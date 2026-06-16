@@ -60,6 +60,16 @@
             "projectName": "service-cliente",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ServiceFacturacionApplication<service-facturacion>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.punto_de_venta.service_facturacion.ServiceFacturacionApplication",
+            "projectName": "service-facturacion",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

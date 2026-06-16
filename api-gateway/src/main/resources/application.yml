@@ -32,4 +32,10 @@ spring:
           uri: http://localhost:4420
           predicates:
           - Path=/api/v1/clientes/**
+
+        # RUTA PARA SERVICIO DE FACTURAS
+        - id: service-facturacion
+          uri: http://localhost:4426
+          predicates:
+          - Path=/api/v1/facturas/**
             
