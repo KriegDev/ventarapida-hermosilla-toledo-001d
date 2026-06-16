@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -36,7 +35,6 @@ public class VentaService {
         for (Detalle detalle : orden.getDetalles()) {
             detalle.setOrden(orden);
 
-            //Se crea un DTO con los detalles necesarios para procesar la venta
             ProductoDTO prod = webClientBuilder.build()
             .get().uri("http://localhost:4425/api/v1/productos/"+detalle.getIdProducto())
             .retrieve()
@@ -47,7 +45,6 @@ public class VentaService {
                 detalle.setDatosProducto(prod);
             }
 
-            //Aquí modificamos el stock del producto
             webClientBuilder.build()
             .post()
             .uri("http://localhost:4425/api/v1/movimiento-inventario/nuevo/"+detalle.getIdProducto())
@@ -127,7 +124,4 @@ public class VentaService {
         listaOrdenes.forEach(this::enriquecerOrden);
         return listaOrdenes;
     }
-
-
-
 }

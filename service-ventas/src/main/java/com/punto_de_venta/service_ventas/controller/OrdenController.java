@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.punto_de_venta.service_ventas.model.Orden;
 import com.punto_de_venta.service_ventas.service.VentaService;
 
+
 @RestController
 @RequestMapping("api/v1/ordenes")
 public class OrdenController {

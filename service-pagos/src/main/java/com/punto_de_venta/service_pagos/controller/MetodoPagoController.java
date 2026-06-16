@@ -2,6 +2,9 @@ package com.punto_de_venta.service_pagos.controller;
 
 import com.punto_de_venta.service_pagos.model.MetodoPago;
 import com.punto_de_venta.service_pagos.service.MetodoPagoService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +20,16 @@ public class MetodoPagoController {
 
     @GetMapping
     public ResponseEntity<List<MetodoPago>> listar() {
-        return ResponseEntity.ok(metodoPagoService.listaMetodosPago());
+        List<MetodoPago> metodoPago = metodoPagoService.listaMetodosPago();
+        if(metodoPago.size()>0){
+            return ResponseEntity.ok(metodoPago);
+        }else{
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @PostMapping
-    public ResponseEntity<MetodoPago> crear(@RequestBody MetodoPago metodoPago) {
+    public ResponseEntity<MetodoPago> crear(@Valid @RequestBody MetodoPago metodoPago) {
         return ResponseEntity.ok(metodoPagoService.crearMetodoPago(metodoPago));
     }
 

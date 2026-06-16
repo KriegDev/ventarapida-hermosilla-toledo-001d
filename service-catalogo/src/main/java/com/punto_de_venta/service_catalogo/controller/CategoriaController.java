@@ -42,7 +42,11 @@ public class CategoriaController {
     @GetMapping("/{id}")
     public ResponseEntity<Categoria> buscarCategoriaId(@PathVariable Long id){
         Categoria categoria = categoriaService.buscarCategoriaId(id);
-        return ResponseEntity.ok(categoria);
+        if (categoria!=null) {
+            return ResponseEntity.ok(categoria);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("/{id}")
@@ -54,6 +58,10 @@ public class CategoriaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarCategoria(@PathVariable Long id){
         String categoriaEliminar = categoriaService.eliminarCategoria(id);
-        return ResponseEntity.ok(categoriaEliminar);
+        if (categoriaEliminar!=null) {
+            return ResponseEntity.ok(categoriaEliminar);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
