@@ -38,4 +38,10 @@ spring:
           uri: http://localhost:4426
           predicates:
           - Path=/api/v1/facturas/**
+
+        # RUTA PARA SERVICIO DE REPORTES
+        - id: service-reportes
+          uri: http://localhost:4429
+          predicates:
+          - Path=/api/v1/reportes/**
             
