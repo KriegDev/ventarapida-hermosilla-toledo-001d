@@ -72,7 +72,25 @@
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "mainClass": "com.punto_de_venta.service_proveedores.ServiceProveedoresApplication",
-            "projectName": "service_proveedores",
+            "projectName": "service_proveedores"},
+            {
+             "type": "java",
+            "name": "Spring Boot-ServiceFacturacionApplication<service-facturacion>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.punto_de_venta.service_facturacion.ServiceFacturacionApplication",
+            "projectName": "service-facturacion",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ServiceReportesApplication<service-reportes>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.punto_de_venta.service_reportes.ServiceReportesApplication",
+            "projectName": "service-reportes",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }

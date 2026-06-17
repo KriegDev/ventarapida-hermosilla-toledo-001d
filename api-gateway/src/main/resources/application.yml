@@ -32,9 +32,23 @@ spring:
           uri: http://localhost:4420
           predicates:
           - Path=/api/v1/clientes/**
+
+        # RUTA PARA SERVICIO DE PROVEEDORES
         - id: service-proveedores
           uri: http://localhost:4427
           predicates:
           - Path=/api/v1/proveedores/**, /api/v1/items-compras/**,/api/v1/ordenes-compras/**
         
+
+        # RUTA PARA SERVICIO DE FACTURAS
+        - id: service-facturacion
+          uri: http://localhost:4426
+          predicates:
+          - Path=/api/v1/facturas/**
+
+        # RUTA PARA SERVICIO DE REPORTES
+        - id: service-reportes
+          uri: http://localhost:4429
+          predicates:
+          - Path=/api/v1/reportes/**
             

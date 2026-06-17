@@ -65,4 +65,13 @@ public class OrdenController {
         }
         return ResponseEntity.ok(listaOrdenes);
     }
+
+    @GetMapping("/total-recaudado")
+    public ResponseEntity<Long> obtenerTotalRecaudado(){
+        Long total = vs.listarOrdenes().stream()
+        .filter(o -> "PAGADO".equalsIgnoreCase(o.getStatus()))
+        .mapToLong(o -> o.getMontoTotal()).sum();
+
+        return ResponseEntity.ok(total);
+    }
 }

@@ -49,4 +49,10 @@ public class StockController {
             return ResponseEntity.noContent().build();
         }
     }
+
+    @GetMapping("/alertas-count")
+    public ResponseEntity<Long> contarAlertasBajoStock(){
+        Long cantidad = (long) is.alertaBajoStock().size();
+        return ResponseEntity.ok(cantidad);
+    }
 }

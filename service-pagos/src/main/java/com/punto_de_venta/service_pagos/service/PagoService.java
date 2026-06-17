@@ -5,9 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.punto_de_venta.service_pagos.model.MetodoPago;
 import com.punto_de_venta.service_pagos.model.Pago;
+import com.punto_de_venta.service_pagos.dto.FacturaDTO;
 import com.punto_de_venta.service_pagos.dto.PagoDTO;
 import com.punto_de_venta.service_pagos.dto.PagoResponse;
 import com.punto_de_venta.service_pagos.repository.MetodoPagoRepository;
@@ -28,6 +31,10 @@ public class PagoService {
 
     @Autowired
     private FlowService flowService;
+
+    @Autowired
+    private WebClient.Builder webClienteBuilder;
+   
 
     public List<Pago> listarPagos() {
         return pagoRepository.findAll();
@@ -80,6 +87,29 @@ public Pago procesarPago(PagoDTO dto) {
             pago.setEstado("PAGADO");
             pago.setEstadoFlow("N/A");
             pago.setFechaPago(LocalDateTime.now());
+
+            // --- Nueva integración generando documento de pago (boleta/factura)
+
+            FacturaDTO peticionFactura = new FacturaDTO();
+            peticionFactura.setIdOrden(pago.getIdOrden());
+            peticionFactura.setMontoTotal(pago.getMonto());
+
+            try{
+                Object respuestaFactura = webClienteBuilder.build()
+                .post()
+                .uri("http://localhost:4426/api/v1/facturas/generar")
+                .body(BodyInserters.fromValue(peticionFactura))
+                .retrieve()
+                .bodyToMono(Object.class)
+                .block();
+
+                System.out.println("Factura generada con éxito: "+respuestaFactura);
+
+
+            } catch (Exception e){
+                System.err.println("Error al generar la factura; "+e.getMessage());
+            }
+
         }
         return pagoRepository.save(pago);
     }
@@ -100,6 +130,27 @@ public Pago procesarPago(PagoDTO dto) {
             pago.setFechaPago(LocalDateTime.now());
             pago.setFlowOrder(estadoReal.getFlowOrder() != null ? estadoReal.getFlowOrder().toString() : "N/A");
             log.info("Pago confirmado exitosamente. Orden ID: {}", pago.getIdOrden());
+
+
+            // --- NUEVO: Generar factura cuando Flow confirma el pago ---
+            FacturaDTO peticionFactura = new FacturaDTO();
+            peticionFactura.setIdOrden(pago.getIdOrden());
+            peticionFactura.setMontoTotal(pago.getMonto());
+
+            try {
+                Object respuestaFactura = webClienteBuilder.build()
+                        .post()
+                        .uri("http://localhost:4426/api/v1/facturas/generar")
+                        .body(BodyInserters.fromValue(peticionFactura))
+                        .retrieve()
+                        .bodyToMono(Object.class)
+                        .block();
+
+                log.info("Factura online generada con éxito: " + respuestaFactura);
+            } catch (Exception e) {
+                log.error("Error al generar la factura online: " + e.getMessage());
+            }
+
         } else {
             pago.setEstado("RECHAZADO");
             pago.setEstadoFlow("REJECTED");
