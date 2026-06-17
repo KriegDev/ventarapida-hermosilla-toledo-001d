@@ -19,7 +19,8 @@
             "mainClass": "com.punto_de_venta.service_catalogo.ServiceCatalogoApplication",
             "projectName": "service-catalogo",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
         },
         {
             "type": "java",
@@ -29,7 +30,8 @@
             "mainClass": "com.punto_de_venta.service_inventario.ServiceInventarioApplication",
             "projectName": "service-inventario",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
         },
         {
             "type": "java",
@@ -39,7 +41,8 @@
             "mainClass": "com.punto_de_venta.service_pagos.ServicePagosApplication",
             "projectName": "service-pagos",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
         },
         {
             "type": "java",
@@ -49,7 +52,8 @@
             "mainClass": "com.punto_de_venta.service_ventas.ServiceVentasApplication",
             "projectName": "service-ventas",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
         },
         {
             "type": "java",
@@ -58,6 +62,17 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "com.punto_de_venta.service_cliente.ServiceClienteApplication",
             "projectName": "service-cliente",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ServiceProveedoresApplication<service_proveedores>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.punto_de_venta.service_proveedores.ServiceProveedoresApplication",
+            "projectName": "service_proveedores",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }

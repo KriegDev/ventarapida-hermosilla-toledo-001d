@@ -32,4 +32,9 @@ spring:
           uri: http://localhost:4420
           predicates:
           - Path=/api/v1/clientes/**
+        - id: service-proveedores
+          uri: http://localhost:4427
+          predicates:
+          - Path=/api/v1/proveedores/**, /api/v1/items-compras/**,/api/v1/ordenes-compras/**
+        
             
