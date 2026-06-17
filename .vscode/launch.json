@@ -52,7 +52,8 @@
             "mainClass": "com.punto_de_venta.service_ventas.ServiceVentasApplication",
             "projectName": "service-ventas",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
         },
         {
             "type": "java",
@@ -67,6 +68,13 @@
         },
         {
             "type": "java",
+            "name": "Spring Boot-ServiceProveedoresApplication<service_proveedores>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.punto_de_venta.service_proveedores.ServiceProveedoresApplication",
+            "projectName": "service_proveedores"},
+            {
+             "type": "java",
             "name": "Spring Boot-ServiceFacturacionApplication<service-facturacion>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

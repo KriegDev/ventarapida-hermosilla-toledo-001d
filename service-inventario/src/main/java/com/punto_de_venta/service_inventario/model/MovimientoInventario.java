@@ -44,6 +44,5 @@ public class MovimientoInventario {
     private BigDecimal monto;
 
     @Column(name = "fecha_movimiento",  nullable = false)
-    @NotNull(message = "No puede contener espacios en blancos ni nulos")
     private LocalDateTime fechaMovimiento;
 }

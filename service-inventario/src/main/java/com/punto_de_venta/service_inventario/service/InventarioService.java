@@ -63,6 +63,7 @@ public class InventarioService {
 
         stockRepository.save(stockActual);
         mov.setStock(stockActual);
+        mov.setFechaMovimiento(LocalDateTime.now());
         return movimientoInventarioRepository.save(mov);
     }
 
