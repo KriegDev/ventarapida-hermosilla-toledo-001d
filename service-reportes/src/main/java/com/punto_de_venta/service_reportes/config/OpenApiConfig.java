@@ -18,7 +18,7 @@ public class OpenApiConfig {
                         .version("1.0")
                         .description("Documentación del módulo de inteligencia empresarial encargado de la consolidación de ingresos por ventas y conteo de alertas de stock."))
                 .servers(List.of(
-                        new Server().url("http://localhost:9090").description("Servidor de acceso unificado (API Gateway)")
+                        new Server().url("http://localhost:4425").description("Servidor de acceso unificado (API Gateway)")
                 ));
     }
 }

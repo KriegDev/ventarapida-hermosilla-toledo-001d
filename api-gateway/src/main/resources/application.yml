@@ -57,7 +57,7 @@ spring:
         - id: service-facturacion
           uri: http://localhost:4426
           predicates:
-          - Path=/api/v1/facturas/**
+          - Path=/api/v1/facturas/** 
 
         # RUTA PARA SERVICIO DE REPORTES
         - id: service-reportes
@@ -106,7 +106,7 @@ spring:
         - id: service-facturacion-docs
           uri: http://localhost:4426
           predicates:
-            - Path=/api/v1/facturacion/v3/api-docs
+            - Path=/api/v1/facturas/v3/api-docs
 
         # RUTA PARA DOCUMENTACIÓN DE REPORTES
         - id: service-reportes-docs
@@ -152,7 +152,7 @@ springdoc:
         url: /api/v1/proveedores/v3/api-docs
 
       - name: Servicio Facturación
-        url: /api/v1/facturacion/v3/api-docs
+        url: /api/v1/facturas/v3/api-docs
 
       - name: Servicio Reportes
         url: /api/v1/reportes/v3/api-docs

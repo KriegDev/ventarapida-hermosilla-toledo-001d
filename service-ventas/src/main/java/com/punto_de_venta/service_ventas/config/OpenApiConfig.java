@@ -20,7 +20,7 @@ public class OpenApiConfig {
                         .version("1.0")
                         .description("Documentación central del motor de transacciones, procesamiento de órdenes, cálculo de montos totales y estados de venta."))
                 .servers(List.of(
-                        new Server().url("http://localhost:9090").description("Servidor de acceso unificado (API Gateway)")
+                        new Server().url("http://localhost:4425").description("Servidor de acceso unificado (API Gateway)")
                 ));
     }
 }
