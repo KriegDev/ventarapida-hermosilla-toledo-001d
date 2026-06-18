@@ -1,4 +1,4 @@
-package com.punto_de_venta.service_facturacion.config;
+package com.punto_de_venta.service_catalogo.config;
 
 import java.util.List;
 
@@ -11,16 +11,15 @@ import io.swagger.v3.oas.models.servers.Server;
 
 @Configuration
 public class OpenApiConfig {
-
     @Bean
     public OpenAPI customOpenAPI(){
         return new OpenAPI()
                 .info(new Info()
-                        .title("API Sistema Punto de Venta - Servicio de Facturación\"")
+                        .title("API Punto de Venta - Servicio Catálogo")
                         .version("1.0")
-                        .description("Documentación de operaciones para emisión, consulta e historial cronológico de facturas y recibos comerciales."))
+                        .description("Documentación del microservicio encargado de gestionar productos y categorías del sistema de punto de venta"))
                 .servers(List.of(
-                    new Server().url("http://localhost:4425").description("Servidor de acceso unificado (API Gateway)")
+                        new Server().url("http://localhost:4425").description("Servidor a través del Gateway")
                 ));
     }
 }

@@ -6,9 +6,22 @@ spring:
     name: api-gateway
   cloud:
     gateway:
+  # --- CONFIGURACIÓN DE CORS GLOBAL ---
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4425"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
       routes:
         # RUTA PARA SERVICIO DE CATÁLOGO
-        - id:  service-catalogo
+        - id: service-catalogo
           uri: http://localhost:4419
           predicates:
           - Path=/api/v1/categorias/**, /api/v1/productos/**
@@ -37,18 +50,115 @@ spring:
         - id: service-proveedores
           uri: http://localhost:4427
           predicates:
-          - Path=/api/v1/proveedores/**, /api/v1/items-compras/**,/api/v1/ordenes-compras/**
+          - Path=/api/v1/proveedores/**, /api/v1/items-compras/**, /api/v1/ordenes-compras/**
         
 
         # RUTA PARA SERVICIO DE FACTURAS
         - id: service-facturacion
           uri: http://localhost:4426
           predicates:
-          - Path=/api/v1/facturas/**
+          - Path=/api/v1/facturas/** 
 
         # RUTA PARA SERVICIO DE REPORTES
         - id: service-reportes
           uri: http://localhost:4429
           predicates:
           - Path=/api/v1/reportes/**
-            
+        
+
+         # RUTA PARA DOCUMENTACIÓN DE CATÁLOGO
+        - id: service-catalogo-docs
+          uri: http://localhost:4419
+          predicates:
+            - Path=/api/v1/catalogo/v3/api-docs
+
+        # RUTA PARA DOCUMENTACIÓN DE INVENTARIO
+        - id: service-inventario-docs
+          uri: http://localhost:4421
+          predicates:
+            - Path=/api/v1/inventario/v3/api-docs
+
+        # RUTA PARA DOCUMENTACIÓN DE VENTAS
+        - id: service-ventas-docs
+          uri: http://localhost:4422
+          predicates:
+            - Path=/api/v1/ventas/v3/api-docs
+
+        # RUTA PARA DOCUMENTACIÓN DE PAGOS
+        - id: service-pagos-docs
+          uri: http://localhost:4423
+          predicates:
+            - Path=/api/v1/pagos/v3/api-docs
+
+        # RUTA PARA DOCUMENTACIÓN DE CLIENTES
+        - id: service-clientes-docs
+          uri: http://localhost:4420
+          predicates:
+            - Path=/api/v1/clientes/v3/api-docs
+
+        # RUTA PARA DOCUMENTACIÓN DE PROVEEDORES
+        - id: service-proveedores-docs
+          uri: http://localhost:4427
+          predicates:
+            - Path=/api/v1/proveedores/v3/api-docs
+
+        # RUTA PARA DOCUMENTACIÓN DE FACTURACIÓN
+        - id: service-facturacion-docs
+          uri: http://localhost:4426
+          predicates:
+            - Path=/api/v1/facturas/v3/api-docs
+
+        # RUTA PARA DOCUMENTACIÓN DE REPORTES
+        - id: service-reportes-docs
+          uri: http://localhost:4429
+          predicates:
+            - Path=/api/v1/reportes/v3/api-docs
+#
+#         # RUTA PARA DOCUMENTACIÓN DE USUARIO AUTENTICACION
+#        - id: service-usuario-autenticacion-docs
+#          uri: http://localhost:4428
+#          predicates:
+#            - Path=/api/v1/usuario-autenticacion/v3/api-docs
+#
+#        # RUTA PARA DOCUMENTACIÓN DE notificaciones
+#        - id: service-notificaciones-docs
+#          uri: http://localhost:4430
+#          predicates:
+#            - Path=/api/v1/notificaciones/v3/api-docs 
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: Servicio Catálogo
+        url: /api/v1/catalogo/v3/api-docs
+
+      - name: Servicio Inventario
+        url: /api/v1/inventario/v3/api-docs
+
+      - name: Servicio Ventas
+        url: /api/v1/ventas/v3/api-docs
+
+      - name: Servicio Pagos
+        url: /api/v1/pagos/v3/api-docs
+
+      - name: Servicio Clientes
+        url: /api/v1/clientes/v3/api-docs
+
+      - name: Servicio Proveedores
+        url: /api/v1/proveedores/v3/api-docs
+
+      - name: Servicio Facturación
+        url: /api/v1/facturas/v3/api-docs
+
+      - name: Servicio Reportes
+        url: /api/v1/reportes/v3/api-docs
+
+#      - name: Servicio Usuario Autenticación
+#        url: /api/v1/usuario-autenticacion/v3/api-docs
+#
+#      - name: Servicio Notificaciones
+#        url: /api/v1/notificaciones/v3/api-docs

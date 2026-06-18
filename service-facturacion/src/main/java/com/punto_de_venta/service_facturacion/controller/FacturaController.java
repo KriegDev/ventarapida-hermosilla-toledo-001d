@@ -22,10 +22,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 @RestController
-@RequestMapping("api/v1/facturas")
+@RequestMapping("/api/v1/facturas")
 @Tag(name = "Gestión de Facturación", description = "Endpoints encargados de emitir y consultar las facturas de las órdenes procesadas")
 @CrossOrigin(origins = "*")
 public class FacturaController {
