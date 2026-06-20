@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ServiceAuthApplication",
+            "request": "launch",
+            "mainClass": "com.punto_de_venta.service_auth.ServiceAuthApplication",
+            "projectName": "service-auth"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-ApiGatewayApplication<api-gateway>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
@@ -72,9 +79,10 @@
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "mainClass": "com.punto_de_venta.service_proveedores.ServiceProveedoresApplication",
-            "projectName": "service_proveedores"},
-            {
-             "type": "java",
+            "projectName": "service_proveedores"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-ServiceFacturacionApplication<service-facturacion>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
