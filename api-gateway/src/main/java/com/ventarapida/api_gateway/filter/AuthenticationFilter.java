@@ -29,7 +29,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
         return (exchange, chain) ->{
             String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
             //validar existencia de header con formato correcto
-            if(authHeader==null || !authHeader.startsWith("Bearer")){
+            if(authHeader==null || !authHeader.startsWith("Bearer ")){
                 return onError(exchange, "Token faltante o formato inválido", HttpStatus.UNAUTHORIZED);
             }
             String token = authHeader.substring(7);
