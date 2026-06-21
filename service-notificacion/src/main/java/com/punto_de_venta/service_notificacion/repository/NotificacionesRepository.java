@@ -9,6 +9,5 @@ import com.punto_de_venta.service_notificacion.model.Notificaciones;
 
 @Repository
 public interface NotificacionesRepository extends JpaRepository<Notificaciones, Long> {
-    List<Notificaciones> findByTipo(String tipo);
-    List<Notificaciones> findByStatus(String status);
+    
 }

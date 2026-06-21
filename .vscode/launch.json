@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ServiceNotificacionApplication",
+            "request": "launch",
+            "mainClass": "com.punto_de_venta.service_notificacion.ServiceNotificacionApplication",
+            "projectName": "service-notificacion"
+        },
+        {
+            "type": "java",
             "name": "ServiceAuthApplication",
             "request": "launch",
             "mainClass": "com.punto_de_venta.service_auth.ServiceAuthApplication",

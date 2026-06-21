@@ -1,4 +1,4 @@
-package com.punto_de_venta.service_cliente.config;
+package com.punto_de_venta.service_notificacion.config;
 
 import java.util.List;
 
@@ -14,17 +14,13 @@ import io.swagger.v3.oas.models.servers.Server;
 
 @Configuration
 public class OpenApiConfig {
-
     @Bean
-    public OpenAPI customOpenAPI() {
+    public OpenAPI customOpenAPI(){
         final String securitySchemeName = "bearerAuth";
-        return new OpenAPI()
-                .info(new Info()
-                        .title("API Punto de Venta - Servicio Clientes")
-                        .version("1.0")
-                        .description("Documentación del microservicio encargado de gestionar clientes del sistema de punto de venta"))
-                .servers(List.of(
-                        new Server().url("http://localhost:4425").description("Servidor a través del Gateway"))).addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
+        return new OpenAPI().info(new Info().title("API punto de venta - Servicio de notificaciones")
+        .version("1.0").description("Gestión y visualización completa de notificaciones del sistema"))
+        .servers(List.of(new Server().url("http://localhost:4425").description("Documentación centralizada de notificaciones,ingreso a través del Gateway")))
+        .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
                 .components(new Components()
                     .addSecuritySchemes(securitySchemeName,
                         new SecurityScheme()
@@ -33,6 +29,6 @@ public class OpenApiConfig {
                             .scheme("bearer")
                             .bearerFormat("JWT")
                     )
-                );   
+                );
     }
 }
